@@ -18,4 +18,4 @@ class Grid:
 	def fill_random(self):
 		for row in self.cells:
 			for cell in row:
-				cell.is_alive = random.choice([True, False, False, False, False, False, False])
+				cell.is_alive = random.choice([True, False])
