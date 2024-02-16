@@ -8,5 +8,5 @@ class Cell:
         self.is_alive = is_alive
 
     def draw(self, screen):
-        color = (0, 0, 0) if not self.is_alive else (0, 255, 0)
+        color = (30, 30, 30) if not self.is_alive else (0, 250, 0)
         pygame.draw.rect(screen, color, (self.x, self.y, self.size, self.size))
