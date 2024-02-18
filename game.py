@@ -105,7 +105,7 @@ class Game:
 
 	def rotate_90_clockwise(self,grid):
 	    # Step 1: Transpose the grid
-	    transposed = list(zip(*grid))
-	    # Step 2: Reverse each row
-	    rotated = [list(reversed(row)) for row in transposed]
-	    return rotated
+		transposed = list(zip(*grid))
+		# Step 2: Reverse each row
+		rotated = [list(reversed(row)) for row in transposed]
+		return rotated
