@@ -87,16 +87,21 @@ class Game:
 
 	def make_preset(self,idPreset,rot):
 
-		row = self.mouse_grid_pos[0]
-		column = self.mouse_grid_pos[1]
-		current_glider = self.presets[idPreset]
+		try:
 
-		for _ in range(rot):
-			current_glider = self.rotate_90_clockwise(current_glider)
+			row = self.mouse_grid_pos[0]
+			column = self.mouse_grid_pos[1]
+			current_glider = self.presets[idPreset]
 
-		for y,GliderRow in enumerate(current_glider):
-			for x,GliderColumn in enumerate(GliderRow):
-				self.current_grid.cells[row+y][column+x].is_alive = GliderColumn
+			for _ in range(rot):
+				current_glider = self.rotate_90_clockwise(current_glider)
+
+			for y,GliderRow in enumerate(current_glider):
+				for x,GliderColumn in enumerate(GliderRow):
+					self.current_grid.cells[row+y][column+x].is_alive = GliderColumn
+
+		except:
+			print('Out of bounds!')
 
 	def rotate_90_clockwise(self,grid):
 	    # Step 1: Transpose the grid

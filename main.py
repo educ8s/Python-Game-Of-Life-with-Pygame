@@ -35,9 +35,7 @@ while True:
 				if not game.run:
 					game.current_grid.fill_random()
 			elif event.key == pygame.K_c:
-				if not game.run:
-					game.current_grid.fill_zeros()
-					game.next_grid.fill_zeros()
+				game.current_grid.fill_zeros()
 			elif event.key == pygame.K_KP_PLUS:
 				frameRate*=1.5
 			elif event.key == pygame.K_KP_MINUS and frameRate > 2:
