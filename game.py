@@ -11,6 +11,27 @@ class Game:
 		self.next_grid = Grid(width, height, cell_size)
 		self.draw_current = True  # Flag to determine which grid to draw
 		self.run = False
+		self.mouse_grid_pos = (0,0)
+		self.presets = [
+		[
+		[0,1,0],
+		[0,0,1],
+		[1,1,1]
+		]
+		,
+		[
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1,1],
+		[1,1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[1,1,0,0,0,0,0,0,0,0,1,0,0,0,1,0,1,1,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+		[0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+		]
+
+		]
 
 	def update(self):
 		if self.run:
@@ -33,6 +54,12 @@ class Game:
 				for column in range(self.columns):
 					self.current_grid.cells[row][column].is_alive = self.next_grid.cells[row][column].is_alive
 
+	def update_mouse_pos(self):
+		x, y = pygame.mouse.get_pos()
+		row = y // self.cell_size
+		column = x // self.cell_size
+		self.mouse_grid_pos = row , column
+
 	def count_live_neighbors(self, row, column, grid):
 		directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
 		live_neighbors = 0
@@ -51,10 +78,29 @@ class Game:
 
 	def GetClickedCell(self):
 		if any(pygame.mouse.get_pressed()):
-			x, y = pygame.mouse.get_pos()
-			row = y // self.cell_size
-			column = x // self.cell_size
+			row = self.mouse_grid_pos[0]
+			column = self.mouse_grid_pos[1]
 			self.current_grid.cells[row][column].is_alive = not self.current_grid.cells[row][column].is_alive
 
 	def start(self):
 		self.run = True
+
+	def make_preset(self,idPreset,rot):
+
+		row = self.mouse_grid_pos[0]
+		column = self.mouse_grid_pos[1]
+		current_glider = self.presets[idPreset]
+
+		for _ in range(rot):
+			current_glider = self.rotate_90_clockwise(current_glider)
+
+		for y,GliderRow in enumerate(current_glider):
+			for x,GliderColumn in enumerate(GliderRow):
+				self.current_grid.cells[row+y][column+x].is_alive = GliderColumn
+
+	def rotate_90_clockwise(self,grid):
+	    # Step 1: Transpose the grid
+	    transposed = list(zip(*grid))
+	    # Step 2: Reverse each row
+	    rotated = [list(reversed(row)) for row in transposed]
+	    return rotated
