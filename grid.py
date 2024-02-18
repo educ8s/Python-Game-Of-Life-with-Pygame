@@ -18,4 +18,7 @@ class Grid:
 	def fill_random(self):
 		for row in self.cells:
 			for cell in row:
-				cell.is_alive = random.choice([True, False])
+				cell.is_alive = random.choice([True, False, False, False, False, False])
+
+	def fill_zeros(self):
+		self.cells = [[Cell(x * self.cell_size, y * self.cell_size, self.cell_size) for x in range(self.columns)] for y in range(self.rows)]
