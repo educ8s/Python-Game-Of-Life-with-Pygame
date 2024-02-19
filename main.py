@@ -1,9 +1,9 @@
 import pygame, sys
 from game import Game
 
-WINDOW_WIDTH = 800
+WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
-CELL_SIZE = 16
+CELL_SIZE = 4
 
 pygame.init()
 

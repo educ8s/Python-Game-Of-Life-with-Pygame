@@ -18,20 +18,20 @@ class Game:
 				for column in range(self.columns):
 					live_neighbors = self.count_live_neighbors(row, column, self.current_grid)
 					cell = self.current_grid.cells[row][column]
-					if cell.is_alive:
+					if cell:
 						if live_neighbors < 2 or live_neighbors > 3:
-							self.next_grid.cells[row][column].is_alive = False
+							self.next_grid.cells[row][column] = False
 						else:
-							self.next_grid.cells[row][column].is_alive = True
+							self.next_grid.cells[row][column] = True
 					else:
 						if live_neighbors == 3:
-							self.next_grid.cells[row][column].is_alive = True
+							self.next_grid.cells[row][column] = True
 						else:
-							self.next_grid.cells[row][column].is_alive = False
+							self.next_grid.cells[row][column] = False
 
 			for row in range(self.rows):
 				for column in range(self.columns):
-					self.current_grid.cells[row][column].is_alive = self.next_grid.cells[row][column].is_alive
+					self.current_grid.cells[row][column] = self.next_grid.cells[row][column]
 
 	def count_live_neighbors(self, row, column, grid):
 		directions = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
@@ -42,7 +42,7 @@ class Game:
 		for dx, dy in directions:
 			nx = (row + dx) % max_row
 			ny = (column + dy) % max_column
-			live_neighbors += grid.cells[nx][ny].is_alive
+			live_neighbors += grid.cells[nx][ny]
 			
 		return live_neighbors
 
@@ -54,7 +54,7 @@ class Game:
 			x, y = pygame.mouse.get_pos()
 			row = y // self.cell_size
 			column = x // self.cell_size
-			self.current_grid.cells[row][column].is_alive = not self.current_grid.cells[row][column].is_alive
+			self.current_grid.cells[row][column] = not self.current_grid.cells[row][column]
 
 	def start(self):
 		self.run = True
