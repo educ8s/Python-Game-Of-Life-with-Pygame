@@ -1,5 +1,8 @@
 import pygame, sys
 from game import Game
+import time
+import asyncio,threading
+import math
 
 WINDOW_WIDTH = 800
 WINDOW_HEIGHT = 800
@@ -9,15 +12,41 @@ pygame.init()
 
 font = pygame.font.Font(None, 30)
 
+def UPDATE():
+	global updateTime
+	while True:
+		updateStart = time.time()
+		game.update()
+		game.update_mouse_pos()
+		updateTime = time.time()-updateStart
+
+def DRAW():
+	window.fill(0x000000)
+	drawStart = time.time()
+	game.draw(window)
+	curTime = time.time()-drawStart
+	window.blit(font.render(f'Draw FPS: {(clock.get_fps()):.2f}', True, pygame.Color('white')), (10, 45))
+	window.blit(font.render(f'Update FPS: {inf if updateTime == 0 else (1/updateTime):.2f}', True, pygame.Color('white')), (10, 10))
+	pygame.display.update()
 
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 pygame.display.set_caption("Game of Life")
 
 game = Game(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
 
-clock = pygame.time.Clock()
+async def main():
+    await asyncio.gather(DRAW(), UPDATE())
+
+inf= math.inf
+
+clock = pygame.Clock()
 
 frameRate = 60
+
+UPDATE_THREAD = threading.Thread(target=UPDATE)
+
+# Start the threads
+UPDATE_THREAD.start()
 
 while True:
 	for event in pygame.event.get():
@@ -57,15 +86,8 @@ while True:
 	if not game.run:
 		game.GetClickedCell()
 
-	game.update()
-	game.update_mouse_pos()
-	#Drawing
-	window.fill("black")
-	game.draw(window)
+	DRAW()
 
-	fps = clock.get_fps()
-	fps_text = font.render(f'FPS: {fps:.2f}', True, pygame.Color('white'))
-	window.blit(fps_text, (10, 10))
 
-	pygame.display.update()
-	clock.tick(frameRate)
+	clock.tick(60)
+	
