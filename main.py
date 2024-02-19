@@ -3,7 +3,8 @@ from game import Game
 
 WINDOW_WIDTH = 1200
 WINDOW_HEIGHT = 800
-CELL_SIZE = 4
+CELL_SIZE = 16
+FPS = 60
 
 pygame.init()
 
@@ -13,8 +14,6 @@ pygame.display.set_caption("Game of Life")
 game = Game(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
 
 clock = pygame.time.Clock()
-
-frameRate = 12
 
 while True:
 	for event in pygame.event.get():
@@ -36,9 +35,9 @@ while True:
 					game.current_grid.fill_zeros()
 					game.next_grid.fill_zeros()
 			elif event.key == pygame.K_KP_PLUS:
-				frameRate*=1.5
-			elif event.key == pygame.K_KP_MINUS and frameRate > 2:
-				frameRate/=1.5
+				FPS*=1.5
+			elif event.key == pygame.K_KP_MINUS and FPS > 2:
+				FPS/=1.5
 
 	if not game.run:
 		game.GetClickedCell()
@@ -50,4 +49,4 @@ while True:
 	game.draw(window)
 
 	pygame.display.update()
-	clock.tick(frameRate)
+	clock.tick(FPS)
