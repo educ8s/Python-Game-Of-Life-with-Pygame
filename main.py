@@ -1,10 +1,10 @@
 import pygame, sys
 from game import Game
 
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 800
-CELL_SIZE = 16
-FPS = 60
+WINDOW_WIDTH = 750
+WINDOW_HEIGHT = 750
+CELL_SIZE = 25
+FPS = 12
 
 pygame.init()
 
@@ -45,7 +45,7 @@ while True:
 	game.update()
 
 	#Drawing
-	window.fill("black")
+	window.fill((29,29,29))
 	game.draw(window)
 
 	pygame.display.update()

@@ -3,8 +3,6 @@ import random
 
 class Grid:
     def __init__(self, width, height, cell_size):
-        self.width = width
-        self.height = height
         self.cell_size = cell_size
         self.columns = width // cell_size
         self.rows = height // cell_size
@@ -14,7 +12,7 @@ class Grid:
     def draw(self, screen):
         for y in range(self.rows):
             for x in range(self.columns):
-                color = (0, 255, 0) if self.cells[y][x] else (50, 50, 55)
+                color = (0, 255, 0) if self.cells[y][x] else (55, 55, 55)
                 pygame.draw.rect(screen, color, (x * self.cell_size, y * self.cell_size, self.cell_size - 1, self.cell_size - 1))
 
     def fill_random(self):
