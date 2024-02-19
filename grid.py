@@ -11,6 +11,15 @@ class Grid:
 		self.cells = [[Cell(x * cell_size, y * cell_size, cell_size) for x in range(self.columns)] for y in range(self.rows)]
 
 	def draw(self, screen):
+		square_size = 1
+
+		for row in range(self.height // (square_size + self.cell_size)):
+			y = row * (square_size + self.cell_size)
+			pygame.draw.line(screen, (0,0,0), (0, y), (self.width, y), square_size)
+
+		for col in range(self.width // (square_size + self.cell_size)):
+			x = col * (square_size + self.cell_size)
+			pygame.draw.line(screen, (0,0,0), (x, 0), (x, self.height), square_size)
 		for row in self.cells:
 			for cell in row:
 				cell.draw(screen)

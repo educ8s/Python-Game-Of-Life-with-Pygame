@@ -21,10 +21,8 @@ def UPDATE():
 		updateTime = time.time()-updateStart
 
 def DRAW():
-	window.fill(0x000000)
-	drawStart = time.time()
+	window.fill((50, 50, 55))
 	game.draw(window)
-	curTime = time.time()-drawStart
 	window.blit(font.render(f'Draw FPS: {(clock.get_fps()):.2f}', True, pygame.Color('white')), (10, 45))
 	window.blit(font.render(f'Update FPS: {inf if updateTime == 0 else (1/updateTime):.2f}', True, pygame.Color('white')), (10, 10))
 	pygame.display.update()
@@ -85,6 +83,7 @@ while True:
 
 	if not game.run:
 		game.GetClickedCell()
+
 
 	DRAW()
 
