@@ -21,7 +21,7 @@ while True:
 			sys.exit()
 
 		elif event.type == pygame.MOUSEBUTTONDOWN:
-			if simulation.run == False:
+			if simulation.is_running() == False:
 				pos = pygame.mouse.get_pos()
 				row = pos[1] // CELL_SIZE
 				column = pos[0] // CELL_SIZE
