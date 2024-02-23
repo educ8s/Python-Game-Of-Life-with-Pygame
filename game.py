@@ -17,7 +17,7 @@ class Game:
 			for row in range(self.rows):
 				for column in range(self.columns):
 					live_neighbors = self.count_live_neighbors(row, column, self.current_grid)
-					cell = self.current_grid.cells[row][column]
+					cell_value = self.current_grid.cells[row][column]
 					if cell:
 						if live_neighbors < 2 or live_neighbors > 3:
 							self.next_grid.cells[row][column] = False

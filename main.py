@@ -1,52 +1,55 @@
 import pygame, sys
-from game import Game
+from simulation import Simulation
 
 WINDOW_WIDTH = 750
 WINDOW_HEIGHT = 750
 CELL_SIZE = 25
 FPS = 12
-
-pygame.init()
+GREY = (29, 29, 29)
 
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
-pygame.display.set_caption("Game of Life")
+pygame.display.set_caption("Game Of Life")
 
-game = Game(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
-
+simulation = Simulation(WINDOW_WIDTH, WINDOW_HEIGHT, CELL_SIZE)
 clock = pygame.time.Clock()
 
 while True:
+	# 1. Event Handling
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT:
 			pygame.quit()
 			sys.exit()
-		if event.type == pygame.KEYDOWN:
+
+		elif event.type == pygame.MOUSEBUTTONDOWN:
+			if simulation.run == False:
+				pos = pygame.mouse.get_pos()
+				row = pos[1] // CELL_SIZE
+				column = pos[0] // CELL_SIZE
+				simulation.toggle_cell(row, column)
+
+		elif event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_RETURN:
-				game.start()
-				pygame.display.set_caption("Game of Life is Running")
+				simulation.start()
+				pygame.display.set_caption("Game Of Life is running")
 			elif event.key == pygame.K_SPACE:
-				game.run = False
-				pygame.display.set_caption("Game of Life has Stopped")
+				simulation.stop()
+				pygame.display.set_caption("Game of Life has stopped")
+			elif event.key == pygame.K_f:
+				FPS += 2
+			elif event.key == pygame.K_s:
+				if FPS > 5:
+					FPS -= 2
 			elif event.key == pygame.K_r:
-				if not game.run:
-					game.current_grid.fill_random()
+				simulation.create_random_state()
 			elif event.key == pygame.K_c:
-				if not game.run:
-					game.current_grid.fill_zeros()
-					game.next_grid.fill_zeros()
-			elif event.key == pygame.K_KP_PLUS:
-				FPS*=1.5
-			elif event.key == pygame.K_KP_MINUS and FPS > 2:
-				FPS/=1.5
+				simulation.clear()
 
-	if not game.run:
-		game.GetClickedCell()
+	# 2. Updating
+	simulation.update()
 
-	game.update()
-
-	#Drawing
-	window.fill((29,29,29))
-	game.draw(window)
+	# 3. Drawing
+	window.fill(GREY)
+	simulation.draw(window)
 
 	pygame.display.update()
 	clock.tick(FPS)
