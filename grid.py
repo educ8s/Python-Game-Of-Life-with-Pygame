@@ -10,8 +10,8 @@ class Grid:
 	def draw(self, window):
 		for row in range(self.rows):
 			for column in range(self.columns):
-				color = (0, 255, 0) if self.cells[row][column] else (55, 55, 55)
-				pygame.draw.rect(window, color, (column * self.cell_size,  row * self.cell_size, self.cell_size - 1, self.cell_size - 1))
+				color = (0, 255, 0) if self.cells[row][column] else  (55, 55, 55)
+				pygame.draw.rect(window, color, (column * self.cell_size, row * self.cell_size, self.cell_size -1, self.cell_size - 1))
 
 	def fill_random(self):
 		for row in range(self.rows):
