@@ -2,18 +2,22 @@
 
 Welcome to the easiest introduction to game development with pygame in python. If you're new to pygame, you're in the right place to start your journey. In this video, I will guide you through the installation process of pygame on your Windows computer and we are going to build a simple pygame project from scratch. We'll be using Python with Sublime Text to develop a basic pygame program featuring a keyboard-controlled ball. The entire procedure is very easy and should take no more than 20 minutes.
 
-# How to Run the Program
-Getting started with the Game of Life simulation is straightforward. Once you've cloned the repository and set up your environment as described in the README, you're ready to launch the program and dive into the interactive simulation. Here's how to control and interact with the Game of Life:
+## How to Run the Program
 
-* Start the Simulation: Press Enter to begin the simulation. Watch as the cells evolve through each generation according to the rules of the Game of Life.
-Pause/Stop the Simulation: Press Spacebar at any time to pause the simulation. Press Spacebar again to resume.
-Create a Random Initial State: Press R to fill the grid with a random distribution of alive and dead cells. This is a great way to start a new simulation with unexpected outcomes.
-Clear the Grid: Want to start from scratch? Press C to clear the grid, resetting all cells to a dead state.
-Adjust Simulation Speed:
-Press F to increase the speed of the simulation, making the generations evolve faster.
-Press S to slow down the simulation, allowing you to observe the changes more closely.
-Toggle Cell States with Mouse Click: Use your mouse to click on individual cells in the grid to toggle their state. Clicking an alive cell will make it dead, and clicking a dead cell will bring it to life. This feature allows you to manually create or modify patterns and observe how they evolve.
-These controls give you full command over the simulation, letting you explore the complexity of the Game of Life from your own unique perspective. Experiment with different initial configurations, speeds, and patterns to discover the vast possibilities within this simple yet profound simulation. Enjoy your journey into the mesmerizing world of cellular automata!
+Getting started with the Game of Life simulation is straightforward. After cloning the repository and setting up your environment as outlined in the README, you're ready to launch the program and engage with the interactive simulation. Here's your guide to controlling and interacting with the Game of Life:
+
+- **Start the Simulation**: Press `Enter` to initiate the simulation. Observe as the cells transition through generations, adhering to the Game of Life's rules.
+- **Pause/Stop the Simulation**: Hit the `Spacebar` to pause the simulation at any moment. Press `Spacebar` again to resume.
+- **Create a Random Initial State**: Tap `R` to populate the grid with a random mix of alive and dead cells, perfect for kicking off a new simulation with unforeseen developments.
+- **Clear the Grid**: Want a clean slate? Press `C` to clear the grid, turning all cells to a dead state.
+- **Adjust Simulation Speed**:
+  - Increase the pace by pressing `F`, making the generations evolve quicker.
+  - Slow things down with `S`, giving you a closer look at each generation's transformation.
+- **Toggle Cell States with Mouse Click**: Click on any cell within the grid to toggle its state. Bringing an alive cell to death or reviving a dead cell allows you to manually craft or alter patterns and see how they unfold.
+
+With these controls at your disposal, you have complete mastery over the simulation, offering a sandbox to explore the depth of the Game of Life from your perspective. Try out various initial setups, speeds, and patterns to uncover the endless possibilities hidden within this simple, yet profound simulation. Dive into the captivating world of cellular automata and enjoy the exploration!
+
+
 # Video Tutorial
 
 <p align="center">
